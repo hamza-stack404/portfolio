@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git fetch --all --prune)",
+      "Bash(.specify/scripts/powershell/create-new-feature.ps1 -Json \"\nBased on the constitution for my world-class portfolio, create detailed specifications covering:\n\nFUNCTIONAL REQUIREMENTS:\n1. Landing/Hero Section\n   - Animated introduction with my name and role\n   - Attention-grabbing tagline\n   - Smooth scroll indicators\n   - Particle effects or subtle background animations\n\n2. About Section\n   - Professional bio with personality\n   - Skills visualization \\(interactive, not just lists\\)\n   - Career timeline or journey map\n   - Downloadable resume/CV\n\n3. Projects Showcase\n   - 6-8 featured projects with:\n     * High-quality mockups/screenshots\n     * Technology stack badges\n     * Live demo and GitHub links\n     * Detailed case studies \\(problem, solution, impact\\)\n   - Filterable by technology/category\n   - Hover effects and preview animations\n\n4. Experience/Skills Section\n   - Technical skills with proficiency indicators\n   - Tools and technologies I use\n   - Certifications or achievements\n   - Interactive skill radar or tree\n\n5. Contact Section\n   - Contact form with validation\n   - Social media links\n   - Email and availability status\n   - Location \\(if applicable\\)\n\n6. Additional Features\n   - Dark/light mode toggle with smooth transition\n   - Scroll-triggered animations\n   - Loading transitions between pages/sections\n   - Blog integration \\(optional but recommended\\)\n   - Analytics integration\n   - SEO optimization \\(meta tags, Open Graph, schema markup\\)\n\nTECHNICAL SPECIFICATIONS:\n- Specify exact tech stack \\(React/Next.js/Vue, etc.\\)\n- Animation libraries \\(Framer Motion, GSAP, etc.\\)\n- Styling approach \\(Tailwind, CSS-in-JS, etc.\\)\n- State management if needed\n- Form handling and validation\n- Hosting and deployment strategy\n- Performance optimization techniques\n\nDESIGN SPECIFICATIONS:\n- Color palette \\(primary, secondary, accent, neutral colors\\)\n- Typography scale and font choices\n- Spacing system\n- Animation timing and easing functions\n- Breakpoint definitions\n- Component hierarchy\n\nProvide detailed specifications for each section with acceptance criteria.\" --json --number 1 --short-name \"portfolio-spec\")",
+      "Bash(npm create next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias=\"@/*\" --use-pnpm)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias=\"@/*\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias=\"@/*\" --no-react-compiler)",
+      "Bash(npm install framer-motion lucide-react clsx tailwind-merge)",
+      "Bash(dir /AD)",
+      "Bash(dir)",
+      "Bash(npm install next-themes)",
+      "Bash(npm install next-themes --save)",
+      "Bash(npm cache clean --force)",
+      "Bash(npm install)",
+      "Bash(test:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build)",
+      "Bash(\"C:\\\\Users\\\\Noman Traders\\\\OneDrive\\\\Desktop\\\\portfolio\\\\QUICK_START.md\":*)",
+      "Bash(where npm)",
+      "Bash(npm run dev)",
+      "Bash(npx next dev)",
+      "Bash(curl -s http://localhost:300)",
+      "Bash(taskkill:*)",
+      "Bash(curl:*)"
+    ]
+  }
+}

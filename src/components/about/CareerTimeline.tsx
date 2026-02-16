@@ -1,0 +1,90 @@
+'use client';
+
+import * as React from 'react';
+import { motion } from 'framer-motion';
+import { TimelineItem } from './TimelineItem';
+
+interface TimelineEntry {
+  id: string;
+  title: string;
+  company: string;
+  period: string;
+  description: string;
+  achievements: string[];
+  technologies: string[];
+}
+
+const timelineData: TimelineEntry[] = [
+  {
+    id: '1',
+    title: 'Senior Full-Stack Developer',
+    company: 'Tech Company Inc.',
+    period: '2022 - Present',
+    description: 'Leading development of enterprise-scale web applications',
+    achievements: [
+      'Architected and implemented microservices architecture serving 1M+ users',
+      'Reduced application load time by 60% through optimization',
+      'Mentored team of 5 junior developers',
+    ],
+    technologies: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'AWS'],
+  },
+  {
+    id: '2',
+    title: 'Full-Stack Developer',
+    company: 'Startup Solutions',
+    period: '2020 - 2022',
+    description: 'Built and maintained multiple client-facing applications',
+    achievements: [
+      'Developed 10+ production applications from scratch',
+      'Implemented CI/CD pipeline reducing deployment time by 80%',
+      'Collaborated with design team to improve UX metrics by 40%',
+    ],
+    technologies: ['React', 'TypeScript', 'Express', 'MongoDB', 'Docker'],
+  },
+  {
+    id: '3',
+    title: 'Frontend Developer',
+    company: 'Digital Agency',
+    period: '2019 - 2020',
+    description: 'Created responsive and accessible web interfaces',
+    achievements: [
+      'Built 20+ responsive websites with 100% accessibility compliance',
+      'Improved page speed scores to 95+ on Lighthouse',
+      'Established component library used across all projects',
+    ],
+    technologies: ['React', 'JavaScript', 'SCSS', 'Webpack'],
+  },
+];
+
+export function CareerTimeline() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="space-y-6"
+    >
+      <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 text-center">
+        Career Journey
+      </h3>
+
+      <div className="relative">
+        {/* Timeline line */}
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-neutral-200 dark:bg-neutral-800 -translate-x-1/2" />
+
+        {/* Timeline items */}
+        <div className="space-y-12">
+          {timelineData.map((entry, index) => (
+            <TimelineItem
+              key={entry.id}
+              entry={entry}
+              index={index}
+              isLast={index === timelineData.length - 1}
+            />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
