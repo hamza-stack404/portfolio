@@ -111,24 +111,28 @@ export function ProjectsGrid() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-neutral-50 dark:bg-neutral-900">
+    <section id="projects" className="py-20 bg-gradient-to-br from-secondary-50/50 via-white to-accent-50/30 dark:from-secondary-950/30 dark:via-neutral-950 dark:to-accent-950/20 relative overflow-hidden">
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-20 left-0 w-96 h-96 bg-secondary-200/20 dark:bg-secondary-800/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-0 w-96 h-96 bg-accent-200/20 dark:bg-accent-800/10 rounded-full blur-3xl" />
+
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative z-10"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
             Featured Projects
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
             Explore my portfolio of projects showcasing expertise across various technologies
           </p>
         </motion.div>
 
-        <div className="mb-12">
+        <div className="mb-12 relative z-10">
           <FilterControls
             categories={categories}
             selectedCategory={selectedCategory}
@@ -139,13 +143,13 @@ export function ProjectsGrid() {
         </div>
 
         {filteredProjects.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-neutral-600 dark:text-neutral-400">
+          <div className="text-center py-12 relative z-10">
+            <p className="text-neutral-600 dark:text-neutral-300">
               No projects found matching your criteria.
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
             {filteredProjects.map((project) => (
               <ProjectCard
                 key={project.id}

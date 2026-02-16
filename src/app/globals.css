@@ -5,47 +5,34 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 189 94% 43%;
-    --secondary-foreground: 0 0% 100%;
-    --accent: 271 81% 56%;
-    --accent-foreground: 0 0% 100%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --border: 214 32% 91%;
-    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 239 84% 10%;
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
-    --card: 239 84% 10%;
-    --card-foreground: 210 40% 98%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 189 94% 43%;
-    --secondary-foreground: 0 0% 100%;
-    --accent: 271 81% 56%;
-    --accent-foreground: 0 0% 100%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --border: 217 33% 17%;
   }
 
   * {
-    @apply border-border;
+    border-color: rgb(229 231 235);
+  }
+
+  .dark * {
+    border-color: rgb(55 65 81);
   }
 
   body {
-    @apply bg-white dark:bg-gradient-to-br dark:from-primary-950 dark:via-primary-900 dark:to-neutral-950 text-neutral-900 dark:text-neutral-50;
+    background: white;
+    color: rgb(17 24 39);
     font-feature-settings: "rlig" 1, "calt" 1;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .dark body {
+    background: linear-gradient(to bottom right, #1e1b4b, #312e81, #0a0a0a);
+    color: rgb(249 250 251);
   }
 
   html {
@@ -58,20 +45,31 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-neutral-100 dark:bg-neutral-900;
+    background: rgb(243 244 246);
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: rgb(17 24 39);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary-400 dark:bg-primary-600 rounded-full;
+    background: rgb(129 140 248);
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary-500 dark:bg-primary-500;
+    background: rgb(99 102 241);
   }
 
   /* Selection */
   ::selection {
-    @apply bg-primary-200 dark:bg-primary-800 text-primary-900 dark:text-primary-100;
+    background: rgb(199 210 254);
+    color: rgb(30 27 75);
+  }
+
+  .dark ::selection {
+    background: rgb(67 56 202);
+    color: rgb(224 231 255);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -92,22 +90,46 @@
 /* Components layer */
 @layer components {
   .container {
-    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   /* Gradient text */
   .gradient-text {
-    @apply bg-gradient-to-r from-primary-600 via-secondary-500 to-accent-600 bg-clip-text text-transparent;
+    background: linear-gradient(to right, #4f46e5, #06b6d4, #a855f7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   /* Glass morphism */
   .glass {
-    @apply bg-white/10 dark:bg-white/5 backdrop-blur-lg border border-white/20 dark:border-white/10;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* Card hover effect */
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-glow hover:-translate-y-1;
+  .dark .glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   /* Animated gradient background */

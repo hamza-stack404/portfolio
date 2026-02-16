@@ -10,24 +10,28 @@ import { MapPin, Mail, Phone } from 'lucide-react';
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-20 bg-neutral-50 dark:bg-neutral-900">
+    <section id="contact" className="py-20 bg-gradient-to-br from-primary-50/50 via-white to-secondary-50/30 dark:from-primary-950/30 dark:via-neutral-950 dark:to-secondary-950/20 relative overflow-hidden">
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-0 right-1/3 w-96 h-96 bg-primary-200/20 dark:bg-primary-800/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-secondary-200/20 dark:bg-secondary-800/10 rounded-full blur-3xl" />
+
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-12 relative z-10"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 dark:text-neutral-50 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
             Get In Touch
           </h2>
-          <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? I'd love to hear from you!
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto relative z-10">
           {/* Left Column - Contact Info */}
           <div className="space-y-8">
             <AvailabilityStatus status="available" />
@@ -54,7 +58,7 @@ export function ContactSection() {
                     </p>
                     <a
                       href="mailto:your.email@example.com"
-                      className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      className="text-neutral-600 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
                       your.email@example.com
                     </a>
@@ -71,7 +75,7 @@ export function ContactSection() {
                     </p>
                     <a
                       href="tel:+1234567890"
-                      className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                      className="text-neutral-600 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
                       +1 (234) 567-890
                     </a>
@@ -86,7 +90,7 @@ export function ContactSection() {
                     <p className="font-medium text-neutral-900 dark:text-neutral-50">
                       Location
                     </p>
-                    <p className="text-neutral-600 dark:text-neutral-400">
+                    <p className="text-neutral-600 dark:text-neutral-300">
                       San Francisco, CA
                     </p>
                   </div>

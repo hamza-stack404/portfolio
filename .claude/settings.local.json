@@ -22,7 +22,10 @@
       "Bash(npx next dev)",
       "Bash(curl -s http://localhost:300)",
       "Bash(taskkill:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(\"C:\\\\Users\\\\Noman Traders\\\\OneDrive\\\\Desktop\\\\portfolio\\\\public\\\\manifest.json\":*)"
     ]
   }
 }
