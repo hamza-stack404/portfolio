@@ -16,7 +16,7 @@ export function ParticleBackground() {
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const particlesRef = React.useRef<Particle[]>([]);
   const mousePosition = useMousePosition();
-  const animationFrameRef = React.useRef<number>();
+  const animationFrameRef = React.useRef<number | undefined>(undefined);
 
   React.useEffect(() => {
     const canvas = canvasRef.current;

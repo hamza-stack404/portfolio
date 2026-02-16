@@ -2,11 +2,12 @@
 
 declare global {
   interface Window {
-    gtag?: (
-      command: string,
-      targetId: string,
-      config?: Record<string, any>
-    ) => void;
+    gtag?: {
+      (command: 'js', date: Date): void;
+      (command: 'config', targetId: string, config?: Record<string, any>): void;
+      (command: 'event', action: string, params?: Record<string, any>): void;
+      (command: string, ...args: any[]): void;
+    };
     dataLayer?: any[];
   }
 }

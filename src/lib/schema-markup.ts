@@ -126,14 +126,7 @@ export function generateBlogPostSchema(data: BlogPostSchema) {
   };
 }
 
-// Helper to inject schema into page
-export function injectSchema(schema: object) {
-  if (typeof window === 'undefined') return null;
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+// Helper to get schema as JSON string for injection
+export function getSchemaString(schema: object): string {
+  return JSON.stringify(schema);
 }
