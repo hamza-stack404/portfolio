@@ -44,7 +44,7 @@ export function HeroSection() {
           </motion.div>
 
           <AnimatedText
-            text="Hi, I'm Your Name"
+            text="Hi, I'm Muhammad Hamza"
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
             delay={0.2}
           />
@@ -68,6 +68,8 @@ export function HeroSection() {
           >
             Crafting exceptional digital experiences with modern technologies.
             Passionate about building scalable applications that make a difference.
+            Using Claude Code to enhance development efficiency and code quality.
+            
           </motion.p>
 
           <motion.div

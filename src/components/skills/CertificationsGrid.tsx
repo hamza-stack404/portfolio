@@ -4,39 +4,48 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { CertificationCard } from './CertificationCard';
 
+// In Progress
 const certifications = [
+  // {
+  //   id: '1',
+  //   title: 'AWS Certified Solutions Architect',
+  //   issuer: 'Amazon Web Services',
+  //   date: 'January 2024',
+  //   validationUrl: 'https://aws.amazon.com/verification',
+  //   credentialId: 'AWS-CSA-2024-001',
+  // },
+  // {
+  //   id: '2',
+  //   title: 'Professional Scrum Master I',
+  //   issuer: 'Scrum.org',
+  //   date: 'November 2023',
+  //   validationUrl: 'https://scrum.org/certificates',
+  //   credentialId: 'PSM-I-2023-456',
+  // },
+  // {
+  //   id: '3',
+  //   title: 'Meta Front-End Developer',
+  //   issuer: 'Meta (Coursera)',
+  //   date: 'August 2023',
+  //   validationUrl: 'https://coursera.org/verify',
+  //   credentialId: 'META-FE-2023-789',
+  // },
+  // {
+  //   id: '4',
+  //   title: 'Google Cloud Professional',
+  //   issuer: 'Google Cloud',
+  //   date: 'June 2023',
+  //   validationUrl: 'https://cloud.google.com/certification',
+  //   credentialId: 'GCP-PRO-2023-321',
+  // },
   {
-    id: '1',
-    title: 'AWS Certified Solutions Architect',
-    issuer: 'Amazon Web Services',
-    date: 'January 2024',
-    validationUrl: 'https://aws.amazon.com/verification',
-    credentialId: 'AWS-CSA-2024-001',
-  },
-  {
-    id: '2',
-    title: 'Professional Scrum Master I',
-    issuer: 'Scrum.org',
-    date: 'November 2023',
-    validationUrl: 'https://scrum.org/certificates',
-    credentialId: 'PSM-I-2023-456',
-  },
-  {
-    id: '3',
-    title: 'Meta Front-End Developer',
-    issuer: 'Meta (Coursera)',
-    date: 'August 2023',
-    validationUrl: 'https://coursera.org/verify',
-    credentialId: 'META-FE-2023-789',
-  },
-  {
-    id: '4',
-    title: 'Google Cloud Professional',
-    issuer: 'Google Cloud',
-    date: 'June 2023',
-    validationUrl: 'https://cloud.google.com/certification',
-    credentialId: 'GCP-PRO-2023-321',
-  },
+    id: '5',
+    title: 'Certified AI Engineer',
+    issuer: 'GIAIC',
+    date: 'Still in Progress',
+    validationUrl: 'https://www.giaic.org/certifications',
+    credentialId: '',
+  }
 ];
 
 export function CertificationsGrid() {

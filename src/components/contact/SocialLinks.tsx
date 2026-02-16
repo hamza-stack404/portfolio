@@ -8,13 +8,13 @@ const socialLinks = [
   {
     name: 'GitHub',
     icon: Github,
-    url: 'https://github.com',
+    url: 'https://github.com/hamza-stack404',
     color: 'hover:text-neutral-900 dark:hover:text-neutral-50',
   },
   {
     name: 'LinkedIn',
     icon: Linkedin,
-    url: 'https://linkedin.com',
+    url: 'https://www.linkedin.com/in/muhammad-hamza-stack404/',
     color: 'hover:text-blue-600 dark:hover:text-blue-400',
   },
   {
@@ -26,7 +26,7 @@ const socialLinks = [
   {
     name: 'Email',
     icon: Mail,
-    url: 'mailto:your.email@example.com',
+    url: 'mailto:hamzasajjad2032009@gmail.com',
     color: 'hover:text-red-600 dark:hover:text-red-400',
   },
 ];

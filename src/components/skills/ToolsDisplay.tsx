@@ -18,42 +18,42 @@ const toolCategories = [
   {
     name: 'Development',
     icon: Code2,
-    tools: ['VS Code', 'WebStorm', 'Cursor', 'Postman'],
+    tools: ['VS Code',  'Cursor', 'GitHub Copilot', 'Claude Code'],
   },
   {
     name: 'Version Control',
     icon: GitBranch,
-    tools: ['Git', 'GitHub', 'GitLab', 'Bitbucket'],
+    tools: ['Git', 'GitHub'],
   },
   {
     name: 'Cloud & DevOps',
     icon: Cloud,
-    tools: ['AWS', 'Vercel', 'Docker', 'Kubernetes'],
+    tools: ['Vercel', 'Docker', 'Kubernetes'],
   },
   {
     name: 'Databases',
     icon: Database,
-    tools: ['PostgreSQL', 'MongoDB', 'Redis', 'Prisma'],
+    tools: ['PostgreSQL', 'NeonDB'],
   },
   {
     name: 'Package Managers',
     icon: Package,
-    tools: ['npm', 'yarn', 'pnpm', 'bun'],
+    tools: ['npm', 'yarn', 'pnpm'],
   },
   {
     name: 'Design Tools',
     icon: Palette,
-    tools: ['Figma', 'Adobe XD', 'Sketch', 'Photoshop'],
+    tools: ['Photoshop'],
   },
   {
     name: 'Terminal',
     icon: Terminal,
-    tools: ['Bash', 'Zsh', 'PowerShell', 'iTerm2'],
+    tools: ['Bash', 'Zsh', 'PowerShell', 'Windows Terminal'],
   },
   {
     name: 'Build Tools',
     icon: Wrench,
-    tools: ['Webpack', 'Vite', 'Turbopack', 'esbuild'],
+    tools: ['Webpack', 'Turbopack', ],
   },
 ];
 

@@ -17,11 +17,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Your Name - Full-Stack Developer Portfolio",
+    default: "Muhammad Hamza - Full-Stack Developer Portfolio",
     template: "%s | Your Name",
   },
   description:
-    "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences with modern technologies.",
+    "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences with modern technologies.Also creating skills by using Claude Code and spec-driven development approach.",
   keywords: [
     "Full-Stack Developer",
     "React Developer",
@@ -40,30 +40,30 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://yourportfolio.com"),
+  metadataBase: new URL("https://portfolio-vert-two-41.vercel.app/"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourportfolio.com",
-    title: "Your Name - Full-Stack Developer Portfolio",
+    url: "https://portfolio-vert-two-41.vercel.app/",
+    title: "Muhammad Hamza - Full-Stack Developer Portfolio",
     description:
       "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences.",
-    siteName: "Your Name Portfolio",
+    siteName: "Muhammad Hamza Portfolio",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Your Name - Full-Stack Developer",
+        alt: "Muhammad Hamza - Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your Name - Full-Stack Developer Portfolio",
+    title: "Muhammad Hamza - Full-Stack Developer Portfolio",
     description:
       "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
     creator: "@yourusername",

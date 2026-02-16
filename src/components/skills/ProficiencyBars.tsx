@@ -8,28 +8,30 @@ const skillCategories = [
   {
     name: 'Frontend Development',
     skills: [
-      { name: 'React/Next.js', level: 95 },
-      { name: 'TypeScript', level: 90 },
-      { name: 'Tailwind CSS', level: 95 },
-      { name: 'HTML/CSS', level: 98 },
+      { name: 'React/Next.js', level: 80 },
+      { name: 'TypeScript', level: 80 },
+      { name: 'Tailwind CSS', level: 89 },
+      { name: 'Javascript', level: 80 },
+      { name: 'HTML/CSS', level: 90 },
     ],
   },
   {
     name: 'Backend Development',
     skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Express/Fastify', level: 85 },
-      { name: 'GraphQL', level: 75 },
-      { name: 'REST APIs', level: 90 },
+      { name: 'Node.js', level: 80 },
+      { name: 'Python', level: 90 },
+      { name: 'Docker', level: 80 },
+      { name: 'FastAPI', level: 80 },
     ],
   },
   {
     name: 'Database & Tools',
     skills: [
       { name: 'PostgreSQL', level: 80 },
-      { name: 'MongoDB', level: 85 },
-      { name: 'Redis', level: 75 },
+      { name: 'NeonDB', level: 80 },
       { name: 'Git', level: 95 },
+      { name: 'VS Code', level: 95 },
+      
     ],
   },
 ];

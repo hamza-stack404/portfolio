@@ -4,9 +4,9 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 
 const skills = [
-  { name: 'Frontend', value: 95 },
-  { name: 'Backend', value: 85 },
-  { name: 'Database', value: 80 },
+  { name: 'Frontend', value: 84 },
+  { name: 'Backend', value: 83 },
+  { name: 'Database', value: 88 },
   { name: 'DevOps', value: 75 },
   { name: 'Testing', value: 85 },
   { name: 'Design', value: 70 },

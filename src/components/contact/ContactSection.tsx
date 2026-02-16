@@ -57,10 +57,10 @@ export function ContactSection() {
                       Email
                     </p>
                     <a
-                      href="mailto:your.email@example.com"
+                      href="mailto:hamzasajjad2032009@gmail.com"
                       className="text-neutral-600 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
-                      your.email@example.com
+                      hamzasajjad2032009@gmail.com
                     </a>
                   </div>
                 </div>
@@ -74,10 +74,10 @@ export function ContactSection() {
                       Phone
                     </p>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+92 327 3892478"
                       className="text-neutral-600 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
                     >
-                      +1 (234) 567-890
+                      +92 327 3892478
                     </a>
                   </div>
                 </div>
@@ -91,7 +91,7 @@ export function ContactSection() {
                       Location
                     </p>
                     <p className="text-neutral-600 dark:text-neutral-300">
-                      San Francisco, CA
+                      Karachi, Pakistan
                     </p>
                   </div>
                 </div>
