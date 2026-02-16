@@ -159,6 +159,6 @@ MIT License - feel free to use this template for your own portfolio!
 
 ## Contact
 
-Your Name - [your.email@example.com](mailto:your.email@example.com)
+Your Name - [hamzasajjad2032009@gmail.com](mailto:hamzasajjad2032009@gmail.com)
 
-Project Link: [https://github.com/yourusername/portfolio](https://github.com/yourusername/portfolio)
+Project Link: [https://github.com/hamza-stack404/portfolio](https://github.com/hamza-stack404/portfolio)
