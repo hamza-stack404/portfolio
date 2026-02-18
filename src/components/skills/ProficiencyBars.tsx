@@ -27,11 +27,7 @@ const skillCategories = [
   {
     name: 'Database & Tools',
     skills: [
-      { name: 'PostgreSQL', level: 80 },
-      { name: 'NeonDB', level: 80 },
-      { name: 'Git', level: 95 },
-      { name: 'VS Code', level: 95 },
-      
+      { name: 'Neon db', level: 80 },
     ],
   },
 ];

@@ -15,9 +15,7 @@ const skills: Skill[] = [
   { name: 'TypeScript', level: 90, category: 'Language' },
   { name: 'Node.js', level: 85, category: 'Backend' },
   { name: 'Tailwind CSS', level: 95, category: 'Styling' },
-  { name: 'PostgreSQL', level: 80, category: 'Database' },
-  { name: 'MongoDB', level: 85, category: 'Database' },
-  { name: 'GraphQL', level: 75, category: 'API' },
+  { name: 'Neon db', level: 80, category: 'Database' },
 ];
 
 export function SkillsVisualization() {
