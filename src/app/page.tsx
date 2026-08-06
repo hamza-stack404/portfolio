@@ -1,26 +1,27 @@
 'use client';
 
 import * as React from 'react';
-import { HeroSection } from '@/components/hero/HeroSection';
+import { motion } from 'framer-motion';
 import { Navigation } from '@/components/navigation/Navigation';
+import { HeroSection } from '@/components/hero/HeroSection';
+import { ProjectsSection } from '@/components/projects/ProjectsSection';
 import { AboutSection } from '@/components/about/AboutSection';
-import { ProjectsGrid } from '@/components/projects/ProjectsGrid';
 import { SkillsSection } from '@/components/skills/SkillsSection';
-import { BlogSection } from '@/components/blog/BlogSection';
 import { ContactSection } from '@/components/contact/ContactSection';
+import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
       <Navigation />
-      <main className="min-h-screen">
+      <main>
         <HeroSection />
+        <ProjectsSection />
         <AboutSection />
-        <ProjectsGrid />
         <SkillsSection />
-        <BlogSection />
         <ContactSection />
       </main>
-    </>
+      <Footer />
+    </div>
   );
 }

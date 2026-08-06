@@ -1,10 +1,29 @@
 @import "tailwindcss";
 
-/* Base layer - CSS variables for theming */
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
+    --primary: 239 84% 67%;
+    --primary-light: 239 84% 77%;
+    --primary-dark: 239 84% 57%;
+    --secondary: 188 86% 53%;
+    --secondary-light: 188 86% 63%;
+    --secondary-dark: 188 86% 43%;
+    --accent: 270 91% 65%;
+    --accent-light: 270 91% 75%;
+    --accent-dark: 270 91% 55%;
+    --neutral-50: 0 0% 98%;
+    --neutral-100: 0 0% 96%;
+    --neutral-200: 0 0% 90%;
+    --neutral-300: 0 0% 83%;
+    --neutral-400: 0 0% 64%;
+    --neutral-500: 0 0% 45%;
+    --neutral-600: 0 0% 32%;
+    --neutral-700: 0 0% 25%;
+    --neutral-800: 0 0% 15%;
+    --neutral-900: 0 0% 9%;
+    --neutral-950: 0 0% 4%;
   }
 
   .dark {
@@ -13,70 +32,42 @@
   }
 
   * {
-    border-color: rgb(229 231 235);
+    border-color: hsl(var(--neutral-200));
   }
 
   .dark * {
-    border-color: rgb(55 65 81);
-  }
-
-  body {
-    background: white;
-    color: rgb(17 24 39);
-    font-feature-settings: "rlig" 1, "calt" 1;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .dark body {
-    background: linear-gradient(to bottom right, #1e1b4b, #312e81, #0a0a0a);
-    color: rgb(249 250 251);
+    border-color: hsl(var(--neutral-800));
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 10px;
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  ::-webkit-scrollbar-track {
-    background: rgb(243 244 246);
-  }
-
-  .dark ::-webkit-scrollbar-track {
-    background: rgb(17 24 39);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgb(129 140 248);
-    border-radius: 9999px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(99 102 241);
-  }
-
-  /* Selection */
   ::selection {
-    background: rgb(199 210 254);
-    color: rgb(30 27 75);
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--primary-dark));
   }
 
   .dark ::selection {
-    background: rgb(67 56 202);
-    color: rgb(224 231 255);
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--primary-light));
   }
 
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
-
     *,
     *::before,
     *::after {
@@ -87,7 +78,6 @@
   }
 }
 
-/* Components layer */
 @layer components {
   .container {
     margin-left: auto;
@@ -112,53 +102,191 @@
     }
   }
 
-  /* Gradient text */
   .gradient-text {
-    background: linear-gradient(to right, #4f46e5, #06b6d4, #a855f7);
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
   }
 
-  /* Glass morphism */
-  .glass {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .dark .glass {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Animated gradient background */
-  .animated-gradient {
-    background: linear-gradient(-45deg, #667eea, #06b6d4, #a855f7, #4338ca);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-  }
-
-  @keyframes gradient {
+  @keyframes gradient-shift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
 
-  /* Floating animation */
-  .float {
-    animation: float 6s ease-in-out infinite;
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+  .dark .glass {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .card {
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark .card:hover {
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px -3px hsl(var(--primary) / 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px hsl(var(--primary) / 0.5);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    background: transparent;
+    color: hsl(var(--foreground));
+    border: 2px solid hsl(var(--neutral-300));
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+    transform: translateY(-2px);
+  }
+
+  .dark .btn-secondary {
+    border-color: hsl(var(--neutral-700));
+  }
+
+  .dark .btn-secondary:hover {
+    border-color: hsl(var(--primary));
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+
+  .section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: hsl(var(--neutral-500));
+    max-width: 36rem;
+  }
+
+  .dark .section-subtitle {
+    color: hsl(var(--neutral-400));
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    border: 1px solid hsl(var(--primary) / 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover {
+    background: hsl(var(--primary) / 0.15);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid hsl(var(--neutral-200));
+    background: transparent;
+    color: hsl(var(--foreground));
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  }
+
+  .input-field:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  }
+
+  .dark .input-field {
+    border-color: hsl(var(--neutral-800));
+  }
+
+  .dark .input-field:focus {
+    border-color: hsl(var(--primary));
   }
 }
 
-/* Utilities layer */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease forwards;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s ease forwards;
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
 }

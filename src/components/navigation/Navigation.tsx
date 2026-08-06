@@ -3,17 +3,12 @@
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { useActiveSection } from '@/hooks/useActiveSection';
-import { smoothScrollTo } from '@/lib/scroll';
-import { Button } from '@/components/ui/Button';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { MobileMenu } from './MobileMenu';
-import { cn } from '@/lib/utils';
+import { useTheme } from '@/contexts/ThemeContext';
+import { Moon, Sun } from 'lucide-react';
 
 const navItems = [
-  { id: 'hero', label: 'Home' },
+  { id: 'projects', label: 'Work' },
   { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'contact', label: 'Contact' },
 ];
@@ -21,7 +16,7 @@ const navItems = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const activeSection = useActiveSection();
+  const { theme, toggleTheme } = useTheme();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -32,98 +27,109 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (id: string) => {
-    smoothScrollTo(id);
+  const scrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
     setIsMobileMenuOpen(false);
   };
 
   return (
     <>
-      <motion.nav
+      <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.3 }}
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md shadow-md'
+            ? 'glass shadow-lg'
             : 'bg-transparent'
-        )}
+        }`}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="container">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="flex-shrink-0"
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="text-xl font-bold"
             >
-              <button
-                onClick={() => handleNavClick('hero')}
-                className="text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
-              >
-                Portfolio
-              </button>
-            </motion.div>
+              <span className="gradient-text">H</span>
+              <span className="text-neutral-900 dark:text-neutral-100">amza</span>
+            </button>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-1">
-              {navItems.map((item, index) => (
-                <motion.div
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => (
+                <button
                   key={item.id}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                  onClick={() => scrollTo(item.id)}
+                  className="px-4 py-2 rounded-lg text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-all"
                 >
-                  <button
-                    onClick={() => handleNavClick(item.id)}
-                    className={cn(
-                      'px-4 py-2 rounded-md text-sm font-medium transition-colors',
-                      activeSection === item.id
-                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/30'
-                        : 'text-neutral-700 dark:text-neutral-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
-                    )}
-                  >
-                    {item.label}
-                  </button>
-                </motion.div>
+                  {item.label}
+                </button>
               ))}
-            </div>
+            </nav>
 
-            {/* Right side actions */}
-            <div className="flex items-center space-x-2">
-              <ThemeToggle />
+            {/* Actions */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={toggleTheme}
+                className="w-10 h-10 rounded-lg flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
 
-              {/* Mobile menu button */}
-              <div className="md:hidden">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  aria-label="Toggle menu"
-                >
-                  {isMobileMenuOpen ? (
-                    <X className="h-6 w-6" />
-                  ) : (
-                    <Menu className="h-6 w-6" />
-                  )}
-                </Button>
-              </div>
+              <button
+                onClick={() => scrollTo('contact')}
+                className="hidden md:inline-flex btn-primary text-sm py-2 px-4"
+              >
+                Hire Me
+              </button>
+
+              {/* Mobile menu toggle */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden w-10 h-10 rounded-lg flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
             </div>
           </div>
         </div>
-      </motion.nav>
+      </motion.header>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <MobileMenu
-            navItems={navItems}
-            activeSection={activeSection}
-            onNavClick={handleNavClick}
-            onClose={() => setIsMobileMenuOpen(false)}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-x-0 top-16 z-40 p-4 md:hidden"
+          >
+            <nav className="glass rounded-2xl p-4 shadow-xl">
+              <div className="flex flex-col gap-1">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollTo(item.id)}
+                    className="px-4 py-3 rounded-lg text-left font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => scrollTo('contact')}
+                  className="mt-2 btn-primary justify-center"
+                >
+                  Hire Me
+                </button>
+              </div>
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

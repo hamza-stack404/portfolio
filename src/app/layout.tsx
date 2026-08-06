@@ -18,10 +18,10 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     default: "Muhammad Hamza - Full-Stack Developer Portfolio",
-    template: "%s | Your Name",
+    template: "%s | Muhammad Hamza",
   },
   description:
-    "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences with modern technologies.Also creating skills by using Claude Code and spec-driven development approach.",
+    "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences with modern technologies.",
   keywords: [
     "Full-Stack Developer",
     "React Developer",
@@ -32,22 +32,22 @@ export const metadata: Metadata = {
     "Portfolio",
     "Software Engineer",
   ],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
-  publisher: "Your Name",
+  authors: [{ name: "Muhammad Hamza" }],
+  creator: "Muhammad Hamza",
+  publisher: "Muhammad Hamza",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://portfolio-vert-two-41.vercel.app/"),
+  metadataBase: new URL("https://hamzadev.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://portfolio-vert-two-41.vercel.app/",
+    url: "https://hamzadev.com/",
     title: "Muhammad Hamza - Full-Stack Developer Portfolio",
     description:
       "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences.",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: "Muhammad Hamza - Full-Stack Developer Portfolio",
     description:
       "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
-    creator: "@yourusername",
+    creator: "@hamza-stack404",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -79,11 +79,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
-    // yahoo: "your-yahoo-verification-code",
   },
 };
 
@@ -99,6 +94,30 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#6366f1" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Muhammad Hamza",
+              jobTitle: "Full-Stack Developer",
+              url: "https://hamzadev.com",
+              sameAs: [
+                "https://github.com/hamza-stack404",
+                "https://linkedin.com/in/hamza",
+              ],
+              knowsAbout: [
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Node.js",
+                "Docker",
+                "Kubernetes",
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}

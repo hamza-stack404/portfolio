@@ -2,11 +2,28 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { AnimatedText } from './AnimatedText';
-import { ParticleBackground } from './ParticleBackground';
-import { ScrollIndicator } from '../ui/ScrollIndicator';
-import { Button } from '../ui/Button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Github, Linkedin, Twitter } from 'lucide-react';
+
+const socialLinks = [
+  { icon: Github, href: 'https://github.com/hamza-stack404', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://linkedin.com/in/hamza', label: 'LinkedIn' },
+  { icon: Twitter, href: 'https://twitter.com/hamza-stack404', label: 'Twitter' },
+];
+
+const techStack = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Docker', 'Kubernetes', 'AWS', 'PostgreSQL'];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
 
 export function HeroSection() {
   const prefersReducedMotion =
@@ -14,106 +31,108 @@ export function HeroSection() {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-primary-50/30 to-secondary-50/30 dark:from-primary-950 dark:via-primary-900 dark:to-neutral-950"
-    >
-      {!prefersReducedMotion && <ParticleBackground />}
+    <section className="relative min-h-screen flex items-center pt-20 pb-32 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-secondary/[0.03] dark:from-primary/[0.08] dark:to-secondary/[0.08]" />
+      
+      {/* Animated orbs */}
+      <motion.div
+        className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 dark:bg-primary/30 rounded-full blur-[128px]"
+        animate={prefersReducedMotion ? {} : { x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/20 dark:bg-secondary/30 rounded-full blur-[128px]"
+        animate={prefersReducedMotion ? {} : { x: [0, -30, 0], y: [0, 20, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
 
-      {/* Animated gradient orbs */}
-      {!prefersReducedMotion && (
-        <>
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary-400/30 dark:bg-primary-600/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-400/30 dark:bg-secondary-600/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-400/20 dark:bg-accent-600/10 rounded-full blur-3xl animate-pulse" />
-        </>
-      )}
-
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 font-medium text-sm border border-primary-200 dark:border-primary-800">
-              <Sparkles className="w-4 h-4" />
-              Welcome to my portfolio
+      <div className="container relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl"
+        >
+          {/* Status badge */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+              </span>
+              Available for new projects
             </span>
           </motion.div>
 
-          <AnimatedText
-            text="Hi, I'm Muhammad Hamza"
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
-            delay={0.2}
-          />
+          {/* Main heading */}
+          <motion.h1 variants={itemVariants} className="section-title mb-6 text-balance">
+            I build{' '}
+            <span className="gradient-text">exceptional</span>
+            <br />
+            digital experiences
+          </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mb-8"
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold gradient-text mb-4">
-              Full-Stack Developer & Creative Problem Solver
-            </h2>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 mb-10 max-w-3xl mx-auto leading-relaxed"
-          >
-            Crafting exceptional digital experiences with modern technologies.
-            Passionate about building scalable applications that make a difference.
-            Using Claude Code to enhance development efficiency and code quality.
-            
+          {/* Subtitle */}
+          <motion.p variants={itemVariants} className="section-subtitle text-balance mb-10">
+            Full-Stack Developer with 8+ years of experience crafting scalable web applications.
+            I transform complex problems into elegant, user-friendly solutions using modern technologies.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <Button
-              size="lg"
-              className="group bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 shadow-glow"
-            >
+          {/* CTA buttons */}
+          <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-12">
+            <a href="#projects" className="btn-primary">
               View My Work
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-primary-600 dark:border-primary-400 text-primary-700 dark:text-primary-300 hover:bg-primary-50 dark:hover:bg-primary-950/50"
-            >
-              Get In Touch
-            </Button>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a href="#contact" className="btn-secondary">
+              Let&apos;s Talk
+            </a>
           </motion.div>
 
-          {/* Tech stack badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="mt-16 flex flex-wrap justify-center gap-3"
-          >
-            {['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind CSS'].map((tech) => (
-              <span
-                key={tech}
-                className="px-4 py-2 rounded-lg bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-neutral-200 dark:border-neutral-700 text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:border-primary-400 dark:hover:border-primary-600 transition-colors"
-              >
-                {tech}
-              </span>
-            ))}
+          {/* Social links */}
+          <motion.div variants={itemVariants} className="flex items-center gap-4 mb-16">
+            <span className="text-sm text-neutral-500 dark:text-neutral-400">Find me on</span>
+            <div className="flex gap-3">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-neutral-600 dark:text-neutral-400 hover:text-primary hover:border-primary/30 transition-all"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
           </motion.div>
-        </div>
+
+          {/* Tech stack */}
+          <motion.div variants={itemVariants}>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">Trusted technologies</p>
+            <div className="flex flex-wrap gap-2">
+              {techStack.map((tech) => (
+                <span key={tech} className="tag">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
 
-      <ScrollIndicator targetId="about" />
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-neutral-300 dark:border-neutral-700 flex justify-center pt-2">
+          <div className="w-1 h-2 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+        </div>
+      </motion.div>
     </section>
   );
 }
