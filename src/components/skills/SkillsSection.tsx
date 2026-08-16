@@ -2,6 +2,10 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 const skillCategories = [
   {
@@ -50,12 +54,8 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <div className="space-y-2">
       <div className="flex justify-between text-sm">
@@ -68,7 +68,11 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: delay * 0.1, ease: 'easeOut' }}
+          transition={{
+            duration: prefersReducedMotion ? 0.01 : 1,
+            delay: prefersReducedMotion ? 0 : delay * 0.1,
+            ease: 'easeOut',
+          }}
         />
       </div>
     </div>
@@ -76,15 +80,17 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
 }
 
 export function SkillsSection() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <section id="skills" className="py-24 lg:py-32">
       <div className="container">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={getAnimationVariants(prefersReducedMotion)}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="max-w-2xl mb-16 text-center mx-auto"
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">Skills & Expertise</span>
@@ -105,10 +111,10 @@ export function SkillsSection() {
           viewport={{ once: true, margin: '-100px' }}
           className="grid md:grid-cols-2 gap-8"
         >
-          {skillCategories.map((category, catIndex) => (
+          {skillCategories.map((category) => (
             <motion.div
               key={category.title}
-              variants={itemVariants}
+              variants={getAnimationVariants(prefersReducedMotion)}
               className="card bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800"
             >
               <h3 className="text-lg font-bold mb-6 flex items-center gap-2">
@@ -121,7 +127,7 @@ export function SkillsSection() {
                     key={skill.name}
                     name={skill.name}
                     level={skill.level}
-                    delay={catIndex * 4 + skillIndex}
+                    delay={skillIndex}
                   />
                 ))}
               </div>
@@ -131,10 +137,10 @@ export function SkillsSection() {
 
         {/* Additional skills tags */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={getAnimationVariants(prefersReducedMotion, 0.3)}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 text-center"
         >
           <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">Also experienced with</p>

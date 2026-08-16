@@ -6,6 +6,10 @@ import { Container } from '@/components/ui/Container';
 import { BlogPreview } from './BlogPreview';
 import { Button } from '@/components/ui/Button';
 import { BookOpen } from 'lucide-react';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 const recentPosts = [
   {
@@ -38,6 +42,7 @@ const recentPosts = [
 ];
 
 export function BlogSection() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <section className="py-20 bg-gradient-to-br from-secondary-50/50 via-white to-primary-50/30 dark:from-secondary-950/30 dark:via-neutral-950 dark:to-primary-950/20 relative overflow-hidden">
       {/* Decorative gradient orbs */}
@@ -46,10 +51,10 @@ export function BlogSection() {
 
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={getAnimationVariants(prefersReducedMotion)}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
           className="text-center mb-12 relative z-10"
         >
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent-100 dark:bg-accent-950/30 mb-4">
@@ -70,10 +75,10 @@ export function BlogSection() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={getAnimationVariants(prefersReducedMotion)}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
           className="text-center relative z-10"
         >
           <Button

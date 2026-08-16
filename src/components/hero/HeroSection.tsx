@@ -1,8 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
+import { usePrefersReducedMotion } from '@/lib/reduced-motion';
+import { Magnetic } from '../ui/Magnetic';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/hamza-stack404', label: 'GitHub' },
@@ -26,24 +29,24 @@ const itemVariants = {
 };
 
 export function HeroSection() {
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false });
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 pb-32 overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center pt-20 pb-32 overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] via-transparent to-secondary/[0.03] dark:from-primary/[0.08] dark:to-secondary/[0.08]" />
       
       {/* Animated orbs */}
       <motion.div
         className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/20 dark:bg-primary/30 rounded-full blur-[128px]"
-        animate={prefersReducedMotion ? {} : { x: [0, 30, 0], y: [0, -20, 0] }}
+        animate={isInView && !prefersReducedMotion ? { x: [0, 30, 0], y: [0, -20, 0] } : {}}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/20 dark:bg-secondary/30 rounded-full blur-[128px]"
-        animate={prefersReducedMotion ? {} : { x: [0, -30, 0], y: [0, 20, 0] }}
+        animate={isInView && !prefersReducedMotion ? { x: [0, -30, 0], y: [0, 20, 0] } : {}}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
@@ -81,10 +84,12 @@ export function HeroSection() {
 
           {/* CTA buttons */}
           <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-12">
-            <a href="#projects" className="btn-primary">
-              View My Work
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            <Magnetic>
+              <a href="#projects" className="btn-primary">
+                View My Work
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </Magnetic>
             <a href="#contact" className="btn-secondary">
               Let&apos;s Talk
             </a>

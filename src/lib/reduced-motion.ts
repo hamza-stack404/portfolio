@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 // Utility to check if user prefers reduced motion
 export function prefersReducedMotion(): boolean {
   if (typeof window === 'undefined') return false;
@@ -39,13 +41,16 @@ export function usePrefersReducedMotion(): boolean {
 }
 
 // Animation variants that respect reduced motion
-export const getAnimationVariants = (reducedMotion: boolean) => {
+export const getAnimationVariants = (
+  reducedMotion: boolean,
+  delay: number = 0
+) => {
   if (reducedMotion) {
     return {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
       exit: { opacity: 0 },
-      transition: { duration: 0.01 },
+      transition: { duration: 0.01, delay },
     };
   }
 
@@ -53,8 +58,6 @@ export const getAnimationVariants = (reducedMotion: boolean) => {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -20 },
-    transition: { duration: 0.5, ease: 'easeOut' },
+    transition: { duration: 0.5, ease: 'easeOut', delay },
   };
 };
-
-

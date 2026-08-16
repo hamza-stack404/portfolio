@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Clock, XCircle } from 'lucide-react';
+import { usePrefersReducedMotion } from '@/lib/reduced-motion';
 
 type AvailabilityStatus = 'available' | 'limited' | 'unavailable';
 
@@ -39,15 +40,16 @@ export function AvailabilityStatus({
   status = 'available',
   customMessage,
 }: AvailabilityStatusProps) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const config = statusConfig[status];
   const Icon = config.icon;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
       className={`p-4 rounded-lg border ${config.bgColor} ${config.borderColor}`}
     >
       <div className="flex items-center gap-3">

@@ -7,6 +7,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Button } from '@/components/ui/Button';
 import { TechnologyBadge } from './TechnologyBadge';
 import Image from 'next/image';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 interface ProjectCardProps {
   project: {
@@ -23,12 +27,13 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.3 }}
       whileHover={{ y: -8 }}
       className="h-full"
     >

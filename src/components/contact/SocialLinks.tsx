@@ -3,6 +3,10 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 const socialLinks = [
   {
@@ -32,12 +36,13 @@ const socialLinks = [
 ];
 
 export function SocialLinks() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
       className="space-y-4"
     >
       <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-50 text-center">
@@ -56,8 +61,11 @@ export function SocialLinks() {
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              whileHover={{ scale: 1.1 }}
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.3,
+                delay: prefersReducedMotion ? 0 : index * 0.1,
+              }}
+              whileHover={{ scale: prefersReducedMotion ? 1 : 1.1 }}
               whileTap={{ scale: 0.95 }}
               className={`w-12 h-12 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-400 transition-colors ${link.color}`}
               aria-label={link.name}

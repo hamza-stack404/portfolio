@@ -3,6 +3,10 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { TimelineItem } from './TimelineItem';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 /**
  * TimelineEntry interface defines the structure for each career position
@@ -75,15 +79,13 @@ const timelineData: TimelineEntry[] = [
  * - Expandable cards showing achievements and technologies for each role
  */
 export function CareerTimeline() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <motion.div
-      // Initial state: invisible and slightly offset down
-      initial={{ opacity: 0, y: 20 }}
-      // State when element comes into view
-      whileInView={{ opacity: 1, y: 0 }}
-      // Only animate once when entering viewport
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
       className="space-y-6"
     >
       {/* Section heading */}

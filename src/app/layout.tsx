@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+const inter = localFont({
+  src: '../fonts/Inter-Variable.woff2',
+  variable: '--font-inter',
+  display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
+const jetbrainsMono = localFont({
+  src: '../fonts/JetBrainsMono-Variable.woff2',
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "Muhammad Hamza Portfolio",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Muhammad Hamza - Full-Stack Developer",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     description:
       "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
     creator: "@hamza-stack404",
-    images: ["/og-image.svg"],
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -90,8 +90,29 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  function getInitialTheme() {
+    try {
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme) return storedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } catch (e) {
+      return 'light';
+    }
+  }
+  const theme = getInitialTheme();
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+})()
+    `,
+          }}
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#6366f1" />
         <script
@@ -122,6 +143,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary-600 focus:text-white"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
           {children}
         </ThemeProvider>

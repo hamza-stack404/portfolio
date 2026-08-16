@@ -4,6 +4,10 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Code2, Rocket, Users, Zap } from 'lucide-react';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 const highlights = [
   {
@@ -29,12 +33,14 @@ const highlights = [
 ];
 
 export function ProfessionalBio() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
       className="grid md:grid-cols-2 gap-8"
     >
       {/* Bio Text */}
@@ -68,10 +74,13 @@ export function ProfessionalBio() {
         {highlights.map((highlight, index) => (
           <motion.div
             key={highlight.title}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.3,
+              delay: prefersReducedMotion ? 0 : index * 0.1,
+            }}
           >
             <Card className="h-full hover:shadow-lg transition-shadow">
               <CardContent className="p-6 space-y-3">

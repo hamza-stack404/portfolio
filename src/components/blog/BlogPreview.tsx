@@ -5,6 +5,10 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 interface BlogPost {
   id: string;
@@ -22,12 +26,13 @@ interface BlogPreviewProps {
 }
 
 export function BlogPreview({ post, index }: BlogPreviewProps) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={getAnimationVariants(prefersReducedMotion, index * 0.1)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: index * 0.1 }}
     >
       <Card className="h-full hover:shadow-lg transition-shadow group">
         <CardContent className="p-6 space-y-4">

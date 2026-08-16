@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Moon, Sun } from 'lucide-react';
+import { Magnetic } from '../ui/Magnetic';
 
 const navItems = [
   { id: 'projects', label: 'Work' },
@@ -17,6 +18,7 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
+  const menuToggleRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +28,12 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  React.useEffect(() => {
+    if (!isMobileMenuOpen) {
+      menuToggleRef.current?.focus();
+    }
+  }, [isMobileMenuOpen]);
 
   const scrollTo = (id: string) => {
     const element = document.getElementById(id);
@@ -81,15 +89,18 @@ export function Navigation() {
                 {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
 
-              <button
-                onClick={() => scrollTo('contact')}
-                className="hidden md:inline-flex btn-primary text-sm py-2 px-4"
-              >
-                Hire Me
-              </button>
+              <Magnetic>
+                <button
+                  onClick={() => scrollTo('contact')}
+                  className="hidden md:inline-flex btn-primary text-sm py-2 px-4"
+                >
+                  Hire Me
+                </button>
+              </Magnetic>
 
               {/* Mobile menu toggle */}
               <button
+                ref={menuToggleRef}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden w-10 h-10 rounded-lg flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                 aria-label="Toggle menu"
@@ -121,12 +132,14 @@ export function Navigation() {
                     {item.label}
                   </button>
                 ))}
-                <button
-                  onClick={() => scrollTo('contact')}
-                  className="mt-2 btn-primary justify-center"
-                >
-                  Hire Me
-                </button>
+                <Magnetic>
+                  <button
+                    onClick={() => scrollTo('contact')}
+                    className="mt-2 btn-primary justify-center"
+                  >
+                    Hire Me
+                  </button>
+                </Magnetic>
               </div>
             </nav>
           </motion.div>

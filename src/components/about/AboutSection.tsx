@@ -3,6 +3,10 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Calendar, Coffee, Zap } from 'lucide-react';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 const stats = [
   { value: '8+', label: 'Years Experience' },
@@ -40,12 +44,10 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 export function AboutSection() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const itemVariants = getAnimationVariants(prefersReducedMotion);
+
   return (
     <section id="about" className="py-24 lg:py-32 bg-neutral-50/50 dark:bg-neutral-900/30">
       <div className="container">

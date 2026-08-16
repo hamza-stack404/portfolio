@@ -2,6 +2,10 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 interface Skill {
   name: string;
@@ -19,12 +23,13 @@ const skills: Skill[] = [
 ];
 
 export function SkillsVisualization() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
       className="space-y-6"
     >
       <h3 className="text-2xl font-bold text-neutral-900 dark:text-neutral-50 text-center">
@@ -35,10 +40,13 @@ export function SkillsVisualization() {
         {skills.map((skill, index) => (
           <motion.div
             key={skill.name}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.3, delay: index * 0.05 }}
+            transition={{
+              duration: prefersReducedMotion ? 0 : 0.3,
+              delay: prefersReducedMotion ? 0 : index * 0.05,
+            }}
             className="space-y-2"
           >
             <div className="flex justify-between items-center">
@@ -54,7 +62,11 @@ export function SkillsVisualization() {
                 initial={{ width: 0 }}
                 whileInView={{ width: `${skill.level}%` }}
                 viewport={{ once: true }}
-                transition={{ duration: 1, delay: index * 0.05, ease: 'easeOut' }}
+                transition={{
+                  duration: prefersReducedMotion ? 0.01 : 1,
+                  delay: prefersReducedMotion ? 0 : index * 0.05,
+                  ease: 'easeOut',
+                }}
                 className="h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full"
               />
             </div>

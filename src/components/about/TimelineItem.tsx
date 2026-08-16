@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { usePrefersReducedMotion } from '@/lib/reduced-motion';
 
 /**
  * TimelineEntry interface represents a single career position in the timeline.
@@ -25,6 +26,7 @@ interface TimelineEntry {
 interface TimelineItemProps {
   entry: TimelineEntry; // The career position data
   index: number; // Position in the timeline (0-indexed, used for animations and layout)
+  isLast?: boolean;
 }
 
 /**
@@ -37,24 +39,22 @@ interface TimelineItemProps {
  * - Alternating left-right layout on desktop for visual balance
  * - Collapsible sections for achievements and technologies
  */
-export function TimelineItem({ entry, index }: TimelineItemProps) {
-  // State to track whether the card is expanded to show additional details
+export function TimelineItem({ entry, index, isLast }: TimelineItemProps) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [isExpanded, setIsExpanded] = React.useState(false);
-  
-  // Determine if this is an even-indexed item (alternates card positioning)
   const isEven = index % 2 === 0;
+
+  const initialX = prefersReducedMotion ? 0 : isEven ? -50 : 50;
 
   return (
     <motion.div
-      // Slide in from left for even indices, from right for odd
-      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-      // Fade in and slide to center when visible
+      initial={{ opacity: 0, x: initialX }}
       whileInView={{ opacity: 1, x: 0 }}
-      // Animate only once when entering viewport
       viewport={{ once: true }}
-      // Stagger animations: each item starts slightly after the previous one
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      // Flexbox layout: stacked on mobile, alternating left-right on desktop
+      transition={{
+        duration: prefersReducedMotion ? 0 : 0.5,
+        delay: prefersReducedMotion ? 0 : index * 0.1,
+      }}
       className={`relative flex items-center ${
         isEven ? 'md:flex-row' : 'md:flex-row-reverse'
       } flex-col md:gap-8`}
@@ -91,11 +91,10 @@ export function TimelineItem({ entry, index }: TimelineItemProps) {
             {/* Only renders when isExpanded is true */}
             {isExpanded && (
               <motion.div
-                // Smooth expand/collapse animation
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
                 className="space-y-4"
               >
                 {/* Key Achievements section */}

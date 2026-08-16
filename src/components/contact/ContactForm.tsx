@@ -5,6 +5,10 @@ import { motion } from 'framer-motion';
 import { Mail, Send, Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 interface FormData {
   name: string;
@@ -21,6 +25,7 @@ interface FormErrors {
 }
 
 export function ContactForm() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [formData, setFormData] = React.useState<FormData>({
     name: '',
     email: '',
@@ -70,15 +75,17 @@ export function ContactForm() {
     setSubmitStatus('idle');
 
     try {
-      // Simulate API call - replace with actual form submission
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // In production, you would submit to your backend or service like Formspree
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -103,10 +110,10 @@ export function ContactForm() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
     >
       <Card>
         <CardHeader>
@@ -254,7 +261,7 @@ export function ContactForm() {
             {/* Status Messages */}
             {submitStatus === 'success' && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="p-4 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800"
               >
@@ -266,7 +273,7 @@ export function ContactForm() {
 
             {submitStatus === 'error' && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="p-4 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-800"
               >

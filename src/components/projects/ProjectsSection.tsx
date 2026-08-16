@@ -4,6 +4,10 @@ import * as React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 const projects = [
   {
@@ -60,12 +64,15 @@ const projects = [
 ];
 
 function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const variants = getAnimationVariants(prefersReducedMotion, index * 0.1);
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={variants}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative card bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 overflow-hidden"
     >
       {/* Project image */}
@@ -159,15 +166,17 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 }
 
 export function ProjectsSection() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   return (
     <section id="projects" className="py-24 lg:py-32">
       <div className="container">
         {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={getAnimationVariants(prefersReducedMotion)}
+          initial="initial"
+          whileInView="animate"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="max-w-2xl mb-16"
         >
           <span className="text-primary font-semibold text-sm uppercase tracking-wider">Featured Work</span>

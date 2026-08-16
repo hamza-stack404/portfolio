@@ -5,8 +5,13 @@ import { motion } from 'framer-motion';
 import { Download, FileText } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import {
+  usePrefersReducedMotion,
+  getAnimationVariants,
+} from '@/lib/reduced-motion';
 
 export function ResumeCard() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const handleDownload = (format: 'pdf' | 'docx') => {
     // In a real implementation, this would trigger a download
     console.log(`Downloading resume in ${format} format`);
@@ -16,10 +21,10 @@ export function ResumeCard() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={getAnimationVariants(prefersReducedMotion)}
+      initial="initial"
+      whileInView="animate"
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
       className="max-w-2xl mx-auto"
     >
       <Card className="bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-950/20 dark:to-accent-950/20 border-primary-200 dark:border-primary-800">
