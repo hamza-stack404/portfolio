@@ -25,7 +25,6 @@ interface TimelineEntry {
 interface TimelineItemProps {
   entry: TimelineEntry; // The career position data
   index: number; // Position in the timeline (0-indexed, used for animations and layout)
-  isLast: boolean; // Whether this is the last item
 }
 
 /**
@@ -38,7 +37,7 @@ interface TimelineItemProps {
  * - Alternating left-right layout on desktop for visual balance
  * - Collapsible sections for achievements and technologies
  */
-export function TimelineItem({ entry, index, isLast }: TimelineItemProps) {
+export function TimelineItem({ entry, index }: TimelineItemProps) {
   // State to track whether the card is expanded to show additional details
   const [isExpanded, setIsExpanded] = React.useState(false);
   

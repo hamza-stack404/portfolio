@@ -7,13 +7,16 @@ export function prefersReducedMotion(): boolean {
 
 // Hook to listen for reduced motion preference changes
 export function usePrefersReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false;
-
   const [prefersReduced, setPrefersReduced] = React.useState(
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    typeof window !== 'undefined'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false
   );
 
   React.useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const handleChange = (event: MediaQueryListEvent) => {
@@ -54,4 +57,4 @@ export const getAnimationVariants = (reducedMotion: boolean) => {
   };
 };
 
-import * as React from 'react';
+

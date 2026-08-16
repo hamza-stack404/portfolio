@@ -6,6 +6,7 @@ import { ExternalLink, Github, Info } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { TechnologyBadge } from './TechnologyBadge';
+import Image from 'next/image';
 
 interface ProjectCardProps {
   project: {
@@ -35,9 +36,10 @@ export function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
         {/* Project Image */}
         <div className="relative h-48 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-950/30 dark:to-accent-950/30 overflow-hidden">
           {project.image ? (
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              fill
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             />
           ) : (

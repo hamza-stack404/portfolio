@@ -83,6 +83,7 @@ export function ContactForm() {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -193,7 +194,7 @@ export function ContactForm() {
                     ? 'border-red-500 focus:ring-red-500'
                     : 'border-neutral-200 dark:border-neutral-700 focus:ring-primary-500'
                 } bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-50 focus:outline-none focus:ring-2 transition-shadow`}
-                placeholder="What's this about?"
+                placeholder="What&apos;s this about?"
               />
               {errors.subject && (
                 <p className="mt-1 text-sm text-red-600 dark:text-red-400">
@@ -258,7 +259,7 @@ export function ContactForm() {
                 className="p-4 rounded-lg bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800"
               >
                 <p className="text-sm text-green-800 dark:text-green-200">
-                  ✓ Message sent successfully! I'll get back to you soon.
+                  ✓ Message sent successfully! I&apos;ll get back to you soon.
                 </p>
               </motion.div>
             )}

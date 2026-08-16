@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Github, Linkedin, Twitter } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Twitter } from 'lucide-react';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/hamza-stack404', label: 'GitHub' },

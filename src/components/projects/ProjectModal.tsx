@@ -6,6 +6,7 @@ import { X, ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { TechnologyBadge } from './TechnologyBadge';
 import { ProjectCaseStudy } from './ProjectCaseStudy';
+import Image from 'next/image';
 
 interface ProjectModalProps {
   project: {
@@ -78,9 +79,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 {/* Header Image */}
                 {project.image && (
                   <div className="relative h-64 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-950/30 dark:to-accent-950/30">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
+                      fill
                       className="w-full h-full object-cover"
                     />
                   </div>

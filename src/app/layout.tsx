@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     siteName: "Muhammad Hamza Portfolio",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Muhammad Hamza - Full-Stack Developer",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     description:
       "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
     creator: "@hamza-stack404",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.svg"],
   },
   robots: {
     index: true,
@@ -91,7 +91,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#6366f1" />
         <script

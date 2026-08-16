@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 
 const projects = [
   {
@@ -67,18 +68,16 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative card bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 overflow-hidden"
     >
-      {/* Project image placeholder */}
+      {/* Project image */}
       <div className="relative h-64 -mx-6 -mt-6 mb-6 overflow-hidden bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="text-2xl font-bold text-white">{project.title[0]}</span>
-            </div>
-            <span className="tag">Featured Project</span>
-          </div>
-        </div>
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
         {/* Hover overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-neutral-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
           <div className="flex gap-3">
             {project.liveUrl && (
               <a

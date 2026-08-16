@@ -4,11 +4,11 @@ declare global {
   interface Window {
     gtag?: {
       (command: 'js', date: Date): void;
-      (command: 'config', targetId: string, config?: Record<string, any>): void;
-      (command: 'event', action: string, params?: Record<string, any>): void;
-      (command: string, ...args: any[]): void;
+      (command: 'config', targetId: string, config?: Record<string, unknown>): void;
+      (command: 'event', action: string, params?: Record<string, unknown>): void;
+      (command: string, ...args: unknown[]): void;
     };
-    dataLayer?: any[];
+    dataLayer?: unknown[];
   }
 }
 
@@ -26,8 +26,8 @@ export const initGA = () => {
 
   // Initialize dataLayer
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer?.push(arguments);
+  window.gtag = function gtag(...args: unknown[]) {
+    window.dataLayer?.push(...args);
   };
 
   window.gtag('js', new Date());
