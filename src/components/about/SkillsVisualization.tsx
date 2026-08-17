@@ -14,11 +14,11 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: 'React', level: 95, category: 'Frontend' },
-  { name: 'Next.js', level: 90, category: 'Frontend' },
-  { name: 'TypeScript', level: 90, category: 'Language' },
-  { name: 'Node.js', level: 85, category: 'Backend' },
-  { name: 'Tailwind CSS', level: 95, category: 'Styling' },
+  { name: 'React', level: 70, category: 'Frontend' },
+  { name: 'Next.js', level: 70, category: 'Frontend' },
+  { name: 'TypeScript', level: 70, category: 'Language' },
+  { name: 'Node.js', level: 70, category: 'Backend' },
+  { name: 'Tailwind CSS', level: 90, category: 'Styling' },
   { name: 'Neon db', level: 80, category: 'Database' },
 ];
 

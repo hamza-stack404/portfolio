@@ -50,7 +50,7 @@ export function ProfessionalBio() {
         </h3>
         <div className="prose dark:prose-invert max-w-none">
           <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-            I&apos;m a passionate full-stack developer with over 2 years of experience building
+            I&apos;m a passionate full-stack developer with 2 years of experience building
             modern web applications. My journey in software development started with a
             curiosity about how things work, which evolved into a career dedicated to
             creating exceptional digital experiences.

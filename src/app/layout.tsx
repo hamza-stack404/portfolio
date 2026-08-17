@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -9,11 +10,21 @@ const inter = localFont({
   display: 'swap',
 });
 
-const jetbrainsMono = localFont({
-  src: '../fonts/JetBrainsMono-Variable.woff2',
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
+// Using Google Fonts for JetBrains Mono as a fallback because of download issues.
+// To use local fonts for JetBrains Mono:
+// 1. Add the font file to the `src/fonts` directory.
+// 2. Uncomment the localFont definition below.
+// 3. Comment out the Google Fonts definition below.
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
+// const jetbrainsMono = localFont({
+//   src: '../fonts/JetBrainsMono-Variable.woff2',
+//   variable: '--font-jetbrains-mono',
+//   display: 'swap',
+// });
 
 export const metadata: Metadata = {
   title: {

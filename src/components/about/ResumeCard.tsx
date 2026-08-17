@@ -63,7 +63,7 @@ export function ResumeCard() {
           </div>
 
           <p className="text-xs text-neutral-500 dark:text-neutral-500 text-center">
-            Last updated: February 2026
+            Last updated: August 2026
           </p>
         </CardContent>
       </Card>

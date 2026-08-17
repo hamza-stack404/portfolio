@@ -4,7 +4,15 @@ import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-export const MagneticButton = ({ children, className, ...rest }) => {
+export const MagneticButton = ({
+  children,
+  className,
+  ...rest
+}: {
+  children: React.ReactNode;
+  className?: string;
+  [key: string]: any;
+}) => {
   const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);

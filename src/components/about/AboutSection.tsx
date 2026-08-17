@@ -9,29 +9,29 @@ import {
 } from '@/lib/reduced-motion';
 
 const stats = [
-  { value: '8+', label: 'Years Experience' },
-  { value: '50+', label: 'Projects Completed' },
-  { value: '30+', label: 'Happy Clients' },
-  { value: '10k+', label: 'Users Served' },
+  { value: '2', label: 'Years Experience' },
+  { value: '15+', label: 'Projects Completed' },
+  { value: '00', label: 'Happy Clients' },
+  { value: '00', label: 'Users Served' },
 ];
 
 const experiences = [
   {
-    period: '2022 - Present',
-    role: 'Senior Full-Stack Developer',
-    company: 'Freelance',
+    period: '2025 - 2026',
+    role: 'Frontend Developer',
+    company: 'Self-Employeed',
     description: 'Leading development of scalable web applications for international clients. Specializing in React, Node.js, and cloud-native architectures.',
   },
   {
-    period: '2020 - 2022',
-    role: 'Full-Stack Developer',
-    company: 'Tech Startup',
+    period: '2024 - 2025',
+    role: 'AI Agent SDK',
+    company: 'Self-Employeed',
     description: 'Built and maintained microservices serving 10k+ daily users. Implemented CI/CD pipelines and containerized deployments.',
   },
   {
-    period: '2018 - 2020',
-    role: 'Frontend Developer',
-    company: 'Digital Agency',
+    period: '2024 - 2024',
+    role: 'Python Developer',
+    company: 'Self-Employeed',
     description: 'Developed responsive web applications for diverse clients. Introduced modern frameworks and best practices to the team.',
   },
 ];
@@ -67,7 +67,7 @@ export function AboutSection() {
             </motion.h2>
             <motion.div variants={itemVariants} className="space-y-4 text-neutral-600 dark:text-neutral-300 leading-relaxed">
               <p>
-                I&apos;m Muhammad Hamza, a Full-Stack Developer based in Karachi, Pakistan with over 8 years
+                I&apos;m Muhammad Hamza, a Full-Stack Developer based in Karachi, Pakistan with 2 years
                 of experience crafting digital products that users love.
               </p>
               <p>
@@ -89,7 +89,7 @@ export function AboutSection() {
               </div>
               <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                 <Calendar className="w-4 h-4 text-primary" />
-                8+ Years Experience
+                2 Years Experience
               </div>
               <div className="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                 <Coffee className="w-4 h-4 text-primary" />
