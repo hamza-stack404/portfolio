@@ -4,8 +4,8 @@ import { Github, Linkedin, Twitter, Heart, ArrowUp } from 'lucide-react';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/hamza-stack404', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/hamza', label: 'LinkedIn' },
-  { icon: Twitter, href: 'https://twitter.com/hamza-stack404', label: 'Twitter' },
+  { icon: Linkedin, href: 'https://linkedin.com/in/muhammad-hamza-stack', label: 'LinkedIn' },
+  { icon: Twitter, href: 'https://x.com/hamza-stack404', label: 'Twitter' },
 ];
 
 const footerLinks = [
@@ -34,7 +34,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <button onClick={scrollToTop} className="text-xl font-bold mb-2">
-              <span className="gradient-text">H</span>
+              <span className="text-primary-600 dark:text-primary-400">H</span>
               <span className="text-neutral-900 dark:text-neutral-100">amza</span>
             </button>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">
@@ -43,15 +43,16 @@ export function Footer() {
           </div>
 
           {/* Links */}
-          <nav className="flex justify-center gap-6">
+          <nav className="flex justify-center gap-6" aria-label="Footer navigation">
             {footerLinks.map(({ label, href }) => (
-              <button
+              <a
                 key={label}
-                onClick={() => scrollTo(href.slice(1))}
+                href={href}
+                onClick={(e) => { e.preventDefault(); scrollTo(href.slice(1)); }}
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
               >
                 {label}
-              </button>
+              </a>
             ))}
           </nav>
 

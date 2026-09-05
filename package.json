@@ -1,5 +1,5 @@
 {
-  "name": "temp-app",
+  "name": "hamza-portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,21 +12,33 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@radix-ui/react-slot": "^1.3.3",
+    "@react-spring/three": "^10.1.2",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@studio-freight/lenis": "^1.0.42",
+    "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.0.0",
     "framer-motion": "^11.0.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26",
     "lucide-react": "^0.454.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "resend": "^6.20.0",
     "sharp": "^0.35.3",
+    "splitting": "^1.1.0",
     "svg-to-img": "^2.0.9",
-    "tailwind-merge": "^2.0.0"
+    "tailwind-merge": "^2.0.0",
+    "three": "^0.185.1",
+    "three-stdlib": "^2.36.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

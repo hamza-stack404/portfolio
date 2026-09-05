@@ -1,23 +1,23 @@
-import { AboutSection } from '@/components/about/AboutSection';
-import { ContactSection } from '@/components/contact/ContactSection';
-import { Footer } from '@/components/footer/Footer';
 import { HeroSection } from '@/components/hero/HeroSection';
-import { Navigation } from '@/components/navigation/Navigation';
-import { ProjectsSection } from '@/components/projects/ProjectsSection';
+import { AboutSection } from '@/components/about/AboutSection';
 import { SkillsSection } from '@/components/skills/SkillsSection';
+import { ProjectsSection } from '@/components/projects/ProjectsSection';
+import { BlogSection } from '@/components/blog/BlogSection';
+import { ContactSection } from '@/components/contact/ContactSection';
+import { Navigation } from '@/components/navigation/Navigation';
+import { Footer } from '@/components/footer/Footer';
 
 export default function Home() {
   return (
-    <>
+    <main className="min-h-screen" id="main-content">
       <Navigation />
-      <main id="main-content">
-        <HeroSection />
-        <ProjectsSection />
-        <AboutSection />
-        <SkillsSection />
-        <ContactSection />
-      </main>
+      <HeroSection />
+      <AboutSection />
+      <SkillsSection />
+      <ProjectsSection />
+      <BlogSection />
+      <ContactSection />
       <Footer />
-    </>
+    </main>
   );
 }

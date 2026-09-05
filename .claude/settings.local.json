@@ -26,7 +26,14 @@
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
       "Bash(\"C:\\\\Users\\\\Noman Traders\\\\OneDrive\\\\Desktop\\\\portfolio\\\\public\\\\manifest.json\":*)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(xargs grep -l \"cursor: none\")",
+      "WebSearch",
+      "Bash(xargs grep -l \"export.*SplitText\")",
+      "Bash(npx tsc *)",
+      "Bash(rm -rf .next)",
+      "Bash(npx next *)",
+      "Bash(echo \"=== EXIT: $? ===\")"
     ]
   }
 }

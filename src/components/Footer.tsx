@@ -34,7 +34,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <button onClick={scrollToTop} className="text-xl font-bold mb-2">
-              <span className="gradient-text">H</span>
+              <span className="text-primary-600 dark:text-primary-400">H</span>
               <span className="text-neutral-900 dark:text-neutral-100">amza</span>
             </button>
             <p className="text-sm text-neutral-500 dark:text-neutral-400">

@@ -1,39 +1,93 @@
 'use client';
 
-import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { useRef, useState, ReactNode } from 'react';
+import { motion, useSpring, useTransform } from 'framer-motion';
 
-export const MagneticButton = ({
-  children,
-  className,
-  ...rest
-}: {
-  children: React.ReactNode;
+interface MagneticButtonProps {
+  children: ReactNode;
   className?: string;
-  [key: string]: any;
-}) => {
+  strength?: number;
+  onClick?: () => void;
+  disabled?: boolean;
+}
+
+export function MagneticButton({
+  children,
+  className = '',
+  strength = 0.3,
+  onClick,
+  disabled = false,
+}: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const spring = {
-    stiffness: 150,
-    damping: 15,
-    mass: 0.1,
-  };
-
-  const springX = useSpring(x, spring);
-  const springY = useSpring(y, spring);
+  const x = useSpring(0, { stiffness: 300, damping: 30 });
+  const y = useSpring(0, { stiffness: 300, damping: 30 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current || disabled) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - centerX) * strength;
+    const deltaY = (e.clientY - centerY) * strength;
+
+    x.set(deltaX);
+    y.set(deltaY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
+
+  return (
+    <motion.button
+      ref={ref}
+      className={className}
+      style={{ x, y }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      disabled={disabled}
+      whileTap={{ scale: 0.95 }}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+// Magnetic wrapper for any element
+export function Magnetic({
+  children,
+  strength = 0.2,
+  className = '',
+}: {
+  children: ReactNode;
+  strength?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const x = useSpring(0, { stiffness: 300, damping: 30 });
+  const y = useSpring(0, { stiffness: 300, damping: 30 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current.getBoundingClientRect();
-    const mouseX = clientX - (left + width / 2);
-    const mouseY = clientY - (top + height / 2);
-    x.set(mouseX * 0.15); // Adjust multiplier for effect
-    y.set(mouseY * 0.15);
+
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - centerX) * strength;
+    const deltaY = (e.clientY - centerY) * strength;
+
+    x.set(deltaX);
+    y.set(deltaY);
   };
 
   const handleMouseLeave = () => {
@@ -42,21 +96,14 @@ export const MagneticButton = ({
   };
 
   return (
-    <motion.button
+    <motion.div
       ref={ref}
+      className={className}
+      style={{ x, y }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{
-        x: springX,
-        y: springY,
-      }}
-      className={cn(
-        'btn-primary', // Base class
-        className
-      )}
-      {...rest}
     >
       {children}
-    </motion.button>
+    </motion.div>
   );
-};
+}

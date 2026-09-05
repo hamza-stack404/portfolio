@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import * as React from 'react';
+import { motion } from 'framer-motion';
 
-export function useActiveSection(): string {
-  const [activeSection, setActiveSection] = useState('');
+export function useActiveSection() {
+  const [activeSection, setActiveSection] = React.useState('');
 
-  useEffect(() => {
-    const sections = document.querySelectorAll('section[id]');
-
+  React.useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -16,12 +15,10 @@ export function useActiveSection(): string {
           }
         });
       },
-      {
-        rootMargin: '-50% 0px -50% 0px',
-        threshold: 0,
-      }
+      { threshold: 0.5, rootMargin: '-100px' }
     );
 
+    const sections = document.querySelectorAll('section[id]');
     sections.forEach((section) => observer.observe(section));
 
     return () => {

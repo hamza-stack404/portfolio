@@ -1,56 +1,50 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SmoothScrollProvider } from "@/contexts/SmoothScrollContext";
+import { LoadingScreen, PerformanceMonitor } from "@/components/ui/Loading";
+import { AdvancedCursor } from "@/components/ui/AdvancedCursor";
+import { PageScrollProgress } from "@/components/ui/ScrollProgressIndicators";
+import { KonamiCodeDetector, HireMeEasterEgg } from "@/components/ui/KonamiCode";
+import { ConsoleEnhancement } from "@/components/ui/ConsoleEnhancement";
+import { MobileBottomNav, FloatingActionButton } from "@/components/mobile/MobileNavigation";
 
 const inter = localFont({
   src: '../fonts/Inter-Variable.woff2',
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 });
 
-// Using Google Fonts for JetBrains Mono as a fallback because of download issues.
-// To use local fonts for JetBrains Mono:
-// 1. Add the font file to the `src/fonts` directory.
-// 2. Uncomment the localFont definition below.
-// 3. Comment out the Google Fonts definition below.
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-// const jetbrainsMono = localFont({
-//   src: '../fonts/JetBrainsMono-Variable.woff2',
-//   variable: '--font-jetbrains-mono',
-//   display: 'swap',
-// });
+// Using system monospace fonts for Phase 1
+// Will add custom monospace font in later phases
+const monoFont = {
+  variable: '--font-jetbrains-mono',
+};
 
 export const metadata: Metadata = {
   title: {
-    default: "Muhammad Hamza - Full-Stack Developer Portfolio",
+    default: "Muhammad Hamza - Full-Stack Developer | Award-Winning Portfolio",
     template: "%s | Muhammad Hamza",
   },
   description:
-    "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences with modern technologies.",
+    "Award-winning portfolio showcasing high-performance web applications built with React, Next.js, TypeScript, and cutting-edge web technologies.",
   keywords: [
     "Full-Stack Developer",
     "React Developer",
-    "Next.js",
+    "Next.js Expert",
     "TypeScript",
     "Node.js",
+    "Award-Winning Portfolio",
     "Web Development",
-    "Portfolio",
-    "Software Engineer",
+    "GSAP Animations",
+    "3D Web Experiences",
+    "Performance Optimization",
   ],
-  authors: [{ name: "Muhammad Hamza" }],
+  authors: [{ name: "Muhammad Hamza", url: "https://hamzadev.com" }],
   creator: "Muhammad Hamza",
   publisher: "Muhammad Hamza",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   metadataBase: new URL("https://hamzadev.com"),
   alternates: {
     canonical: "/",
@@ -59,9 +53,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://hamzadev.com/",
-    title: "Muhammad Hamza - Full-Stack Developer Portfolio",
+    title: "Muhammad Hamza - Award-Winning Full-Stack Developer",
     description:
-      "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js. Building exceptional digital experiences.",
+      "Experience cutting-edge web development with seamless animations and interactive 3D experiences.",
     siteName: "Muhammad Hamza Portfolio",
     images: [
       {
@@ -74,9 +68,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Muhammad Hamza - Full-Stack Developer Portfolio",
+    title: "Muhammad Hamza - Award-Winning Developer",
     description:
-      "Full-Stack Developer specializing in React, Next.js, TypeScript, and Node.js.",
+      "Building exceptional digital experiences with React, Next.js, and modern web technologies.",
     creator: "@hamza-stack404",
     images: ["/og-image.jpg"],
   },
@@ -99,7 +93,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="lenis">
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -111,7 +105,7 @@ export default function RootLayout({
       if (storedTheme) return storedTheme;
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } catch (e) {
-      return 'light';
+      return 'dark';
     }
   }
   const theme = getInitialTheme();
@@ -125,7 +119,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#6366f1" />
+        <meta name="theme-color" content="#047857" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -135,15 +129,25 @@ export default function RootLayout({
               name: "Muhammad Hamza",
               jobTitle: "Full-Stack Developer",
               url: "https://hamzadev.com",
+              email: "hamzasajjad2032009@gmail.com",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Karachi",
+                addressCountry: "PK",
+              },
               sameAs: [
                 "https://github.com/hamza-stack404",
-                "https://linkedin.com/in/hamza",
+                "https://linkedin.com/in/muhammad-hamza-stack",
+                "https://x.com/hamza-stack404",
               ],
               knowsAbout: [
                 "React",
                 "Next.js",
                 "TypeScript",
                 "Node.js",
+                "GSAP",
+                "Three.js",
+                "Web Performance",
                 "Docker",
                 "Kubernetes",
               ],
@@ -152,16 +156,28 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${inter.variable} ${monoFont.variable} font-sans antialiased`}
       >
+        {/* Skip to main content — required for keyboard accessibility (WCAG 2.4.1) */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-primary-600 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-medium focus:shadow-lg"
         >
-          Skip to content
+          Skip to main content
         </a>
         <ThemeProvider>
-          {children}
+          <SmoothScrollProvider>
+            <LoadingScreen />
+            <AdvancedCursor />
+            <PageScrollProgress />
+            <KonamiCodeDetector />
+            <HireMeEasterEgg />
+            <ConsoleEnhancement />
+            <MobileBottomNav />
+            <FloatingActionButton />
+            {children}
+            <PerformanceMonitor />
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>

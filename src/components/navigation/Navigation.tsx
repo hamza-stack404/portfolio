@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Moon, Sun } from 'lucide-react';
 import { Magnetic } from '../ui/Magnetic';
+import { useActiveSection } from '@/hooks/useActiveSection';
 
 const navItems = [
   { id: 'projects', label: 'Work' },
@@ -19,6 +20,7 @@ export function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
   const menuToggleRef = React.useRef<HTMLButtonElement>(null);
+  const activeSection = useActiveSection();
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -62,20 +64,34 @@ export function Navigation() {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-xl font-bold"
             >
-              <span className="gradient-text">H</span>
+              <span className="text-primary-600 dark:text-primary-400">H</span>
               <span className="text-neutral-900 dark:text-neutral-100">amza</span>
             </button>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
               {navItems.map((item) => (
-                <button
+                <a
                   key={item.id}
-                  onClick={() => scrollTo(item.id)}
-                  className="px-4 py-2 rounded-lg text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10 transition-all"
+                  href={`#${item.id}`}
+                  onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    activeSection === item.id
+                      ? 'text-primary'
+                      : 'text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-primary/5 dark:hover:bg-primary/10'
+                  }`}
                 >
+                  {activeSection === item.id && (
+                    <motion.div
+                      layoutId="activeSection"
+                      className="absolute inset-0 bg-primary/10 dark:bg-primary/20 rounded-lg -z-10"
+                      initial={false}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
                   {item.label}
-                </button>
+                </a>
               ))}
             </nav>
 
@@ -121,24 +137,26 @@ export function Navigation() {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-x-0 top-16 z-40 p-4 md:hidden"
           >
-            <nav className="glass rounded-2xl p-4 shadow-xl">
+            <nav className="glass rounded-2xl p-4 shadow-xl" aria-label="Mobile navigation">
               <div className="flex flex-col gap-1">
                 {navItems.map((item) => (
-                  <button
+                  <a
                     key={item.id}
-                    onClick={() => scrollTo(item.id)}
+                    href={`#${item.id}`}
+                    onClick={(e) => { e.preventDefault(); scrollTo(item.id); }}
                     className="px-4 py-3 rounded-lg text-left font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                   >
                     {item.label}
-                  </button>
+                  </a>
                 ))}
                 <Magnetic>
-                  <button
-                    onClick={() => scrollTo('contact')}
+                  <a
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); scrollTo('contact'); }}
                     className="mt-2 btn-primary justify-center"
                   >
                     Hire Me
-                  </button>
+                  </a>
                 </Magnetic>
               </div>
             </nav>
